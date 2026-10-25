@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -33,8 +34,10 @@ app.use('/api/chat', chatRouter);
 app.use('/api/conversations', conversationsRouter);
 app.use('/api/tools', toolsRouter);
 
-// Serve client static build in production
-const clientDist = path.resolve(__dirname, '../client/dist');
+// Serve client static build in production (checking root dist or client/dist)
+const distInRoot = path.resolve(__dirname, '../dist');
+const distInClient = path.resolve(__dirname, '../client/dist');
+const clientDist = fs.existsSync(distInRoot) ? distInRoot : distInClient;
 app.use(express.static(clientDist));
 
 app.get('*', (req, res, next) => {
