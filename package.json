@@ -4,12 +4,16 @@
   "type": "module",
   "description": "InGPT — All-in-One Conversational AI Voice Assistant",
   "main": "server/index.js",
+  "workspaces": [
+    "client"
+  ],
   "scripts": {
     "start": "node server/index.js",
     "server": "node server/index.js",
     "client": "npm run dev --prefix client",
     "dev": "concurrently -k -p \"[{name}]\" -n \"SERVER,CLIENT\" -c \"cyan,magenta\" \"node server/index.js\" \"npm run dev --prefix client\"",
-    "build": "npm run build --prefix client",
+    "build": "node scripts/build.js",
+    "postinstall": "npm install --prefix client",
     "test": "node --test tests/language.test.js tests/backend.test.js"
   },
   "keywords": [
@@ -31,6 +35,8 @@
     "sql.js": "^1.15.1"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "vite": "^6.0.7"
   }
 }

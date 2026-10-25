@@ -86,8 +86,10 @@ async function startServer() {
     console.error('[InGPT Server] Failed to start:', err);
     process.exit(1);
   }
+if (process.env.VERCEL !== '1') {
+  startServer();
+} else {
+  getDb().catch(console.error);
 }
-
-startServer();
 
 export default app;
