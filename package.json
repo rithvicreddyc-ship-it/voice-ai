@@ -1,0 +1,36 @@
+{
+  "name": "ingpt",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "InGPT — All-in-One Conversational AI Voice Assistant",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "server": "node server/index.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently -k -p \"[{name}]\" -n \"SERVER,CLIENT\" -c \"cyan,magenta\" \"node server/index.js\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "test": "node --test tests/language.test.js tests/backend.test.js"
+  },
+  "keywords": [
+    "ai",
+    "voice-assistant",
+    "openai-realtime",
+    "webrtc",
+    "ingpt",
+    "voice-orb"
+  ],
+  "author": "InGPT Team",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "sql.js": "^1.15.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
